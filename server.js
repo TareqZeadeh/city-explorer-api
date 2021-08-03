@@ -25,11 +25,11 @@ const PORT = process.env.PORT;
 server.get('/weather', (req, res) => {
     const lat = Number(req.query.lat);
     const lon = Number(req.query.lon);
-    const cityname = req.query.searchQuery;
+    const cityname = req.query.searchQuery.toLocaleLowerCase();
 
 
     const weatherresult = weatherdata.find(element => {
-        if (((lat === element.lat) && (lon === element.lon)) && (cityname === element.city_name)) {
+        if (((lat === element.lat) && (lon === element.lon)) && (cityname === element.city_name.toLocaleLowerCase() )) {
             return true;
         }
         else {
