@@ -38,23 +38,25 @@ server.get('/weather', (req, res) => {
 //http://localhost:3001/movies?searchQuery=Amman
 //https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
 
-server.get('/movies', (req, res) => {
-    const cityname = req.query.searchQuery.toLocaleLowerCase();
-    const URL = `${process.env.MOVIE_API_URL}?api_key=${process.env.MOVIE_API_KEY}&query=${cityname}`
-    axios
-        .get(URL)
-        .then(result => {
-            console.log('inside promise');
-            res.send(MoviesHandler(result.data));
+server.get('/movies',MoviesHandler);
 
-        })
-        .catch(err => {
-            res.send(err);
-            console.log(err.data)
-        })
+//  function MoviesHandler (req, res) {
+//     const cityname = req.query.searchQuery.toLocaleLowerCase();
+//     const URL = `${process.env.MOVIE_API_URL}?api_key=${process.env.MOVIE_API_KEY}&query=${cityname}`
+//     axios
+//         .get(URL)
+//         .then(result => {
+//             console.log('inside promise');
+//             res.send(MoviesHandler(result.data));
+
+//         })
+//         .catch(err => {
+//             res.send(err);
+//             console.log(err.data)
+//         })
 
 
-})
+// }
 
 server.listen(PORT, () => {
     console.log(`listening To PORT = ${PORT}`);
